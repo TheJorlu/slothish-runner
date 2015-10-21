@@ -31,6 +31,9 @@ public class RocketMissile : MonoBehaviour {
 	{
 		Vector3 explosionPos = transform.position;
 		Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
+		if (colliders.Length == 0) {
+			return;
+		}
 		foreach (Collider hit in colliders) {
 			Rigidbody rb = hit.GetComponent<Rigidbody>();
 			

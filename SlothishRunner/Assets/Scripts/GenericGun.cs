@@ -83,8 +83,9 @@ public class GenericGun : MonoBehaviour {
 			Reload ();
 		} else {
 			ammoClip--;
-			Instantiate(bulletPrefab, bulletSpawnPos.position, Quaternion.identity);
-			bulletPrefab.GetComponent<RocketMissile>().SetDirection(this.transform.forward);
+			GameObject newBullet = Instantiate(bulletPrefab, bulletSpawnPos.position, Quaternion.identity) as GameObject;
+			newBullet.GetComponent<RocketMissile>().SetDirection(this.transform.forward);
+			Debug.DrawLine(this.transform.position, this.transform.forward * 2);
 			canShoot = false;
 			StartCoroutine("TimeBetweenShots");
 		}
