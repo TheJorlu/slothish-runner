@@ -38,7 +38,7 @@ public class RocketMissile : MonoBehaviour {
 			Rigidbody rb = hit.GetComponent<Rigidbody>();
 			
 			if (rb != null){
-				rb.AddExplosionForce(power, explosionPos, radius, 3.0F);
+				rb.AddExplosionForce(power, explosionPos, radius, 10.0F, ForceMode.Impulse);
 				Debug.Log ("RigidBodyFound, Adding Force");
 			}
 			

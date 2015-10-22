@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae54642b29ecc29418d5c3f19bb1e142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
-  power: 7500
+  radius: 5
+  power: 200
   RocketPrefab: {fileID: 131590}
   direction: {x: -.418245733, y: -.85322988, z: .311560214}
   speed: .200000003
