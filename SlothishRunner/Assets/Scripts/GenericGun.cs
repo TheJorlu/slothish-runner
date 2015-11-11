@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GenericGun : MonoBehaviour {
 
+	public int PlayerNumber;
 	public GameObject bulletPrefab;
 	public Transform bulletSpawnPos;
 	private bool canShoot;
@@ -25,8 +26,12 @@ public class GenericGun : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0) && canShoot) {
+		if (Input.GetButtonDown ("Fire" + PlayerNumber.ToString()) && canShoot) {
 			Shoot ();
+		}
+
+		if (Input.GetButtonDown ("Reload" + PlayerNumber.ToString())) {
+			Reload ();
 		}
 	}
 

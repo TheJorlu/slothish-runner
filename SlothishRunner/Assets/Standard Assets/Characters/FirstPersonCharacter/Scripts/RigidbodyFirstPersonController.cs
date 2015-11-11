@@ -11,6 +11,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [Serializable]
         public class MovementSettings
         {
+			public int PlayerNumber;
             public float ForwardSpeed = 8.0f;   // Speed when walking forward
             public float BackwardSpeed = 4.0f;  // Speed when walking backwards
             public float StrafeSpeed = 4.0f;    // Speed when walking sideways
@@ -44,7 +45,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					CurrentTargetSpeed = ForwardSpeed;
 				}
 #if !MOBILE_INPUT
-	            if (Input.GetKey(RunKey))
+	            if (Input.GetButton("Run" + PlayerNumber.ToString()))
 	            {
 		            CurrentTargetSpeed *= RunMultiplier;
 		            m_Running = true;
@@ -74,7 +75,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public bool airControl; // can the user control the direction that is being moved in the air
         }
 
-
+		public int PlayerNumber;
         public Camera cam;
         public MovementSettings movementSettings = new MovementSettings();
         public MouseLook mouseLook = new MouseLook();
@@ -120,7 +121,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             m_RigidBody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
-            mouseLook.Init (transform, cam.transform);
+            mouseLook.Init (transform, cam.transform, PlayerNumber);
         }
 
 
@@ -128,7 +129,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
 
-            if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
+            if (CrossPlatformInputManager.GetButtonDown("Jump" + PlayerNumber.ToString()) && !m_Jump)
             {
                 m_Jump = true;
             }
@@ -212,8 +213,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             
             Vector2 input = new Vector2
                 {
-                    x = CrossPlatformInputManager.GetAxis("Horizontal"),
-                    y = CrossPlatformInputManager.GetAxis("Vertical")
+                    x = CrossPlatformInputManager.GetAxis("Horizontal" + PlayerNumber.ToString()),
+                    y = CrossPlatformInputManager.GetAxis("Vertical" + PlayerNumber.ToString())
                 };
 			movementSettings.UpdateDesiredTargetSpeed(input);
             return input;
